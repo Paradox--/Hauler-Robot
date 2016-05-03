@@ -484,7 +484,6 @@ class Brain:
 testMode = False                                                   # Enters the test Mode first 
 testMotor = False                                                  # Tests the Motor  
 testBluetooth = False                                              # Tests the Bluetooth
-testWifi = False                                                   # Tests the WIFI
 endWifi = False                                                
 testAI = False                                                     # Tests the Ai Brain
 test_PrintBrainData = False                                       # Prints the Brains Data During the test 
@@ -525,35 +524,12 @@ if(testMode == True):
       motor.recieveInformation(.25, 0)                            #Attempt to stop 
       print('>>>>>>>>>>Test for Motor COMPLETE<<<<<<<<<<')
       print('\n \n')
-
-
-   # -- WIFI Test Starts Here --
-   if(testWifi == True): 
-      print('>>>>>>>>>>Testing Web Server<<<<<<<<<<<<<<<')
-      print('>>..  Creating Web Watchdog            ..<<')
-      dog = Watchdog()                                                       #Creating Watchdog     
-      print('>>..  Creating Web Server              ..<<')
-      httpServer = socketserver.TCPServer(("0.0.0.0", webPort), webServer)   #Create the web server
-      print('>>..  Please Try Connecting Now        ..<<')
-      while(endWifi == False):
-         try:
-            print(">>..  Press CTRL+C to Stop Test        ..<<")              # Try to handle Requests 
-            httpServer.handle_request() 
-         except KeyboardInterrupt:                                                                 
-            print('>>..  User Input:: Moving on          ..<<')
-            endWifi = True
-      print('>>..  Rejoining Watchdog Thread        ..<<')                   # Rejoin the Watchdog, and terminate it 
-      dog.terminated = True                                   
-      dog.join()
-      print('>>..  Web Server Termianted Successful ..<<')
-      print('>>>>>>>>>>Test for Wifi COMPLETE<<<<<<<<<<<')
-      print('\n \n')
-
+      
    # -- Bluetooth Test Starts Here
    if(testBluetooth == True):
       print('>>>>>>>>>>>Testing BlueTooth<<<<<<<<<<<<<<<')
       print('>>..       Creating Bluetooth Leash    ..<<')
-      bLeash = BluetoothLeash("HTCONE", "98:0D:2E:22:B6:46")
+      bLeash = BluetoothLeash("Phone Name", "00:00:00:00:00:00")
       print('>>..       Checking if Leash Is Active ..<<')
       bLeash.isLeashActive()
       print('>>..       Testing Search              ..<<')
@@ -576,7 +552,7 @@ if(testMode == True):
    if(testAI == True):
       print('>>>>>>>>>>>Testing AI Brain<<<<<<<<<<<<<<<<')
       print('>>..  Creating Brain Class             ..<<')
-      bLeash = BluetoothLeash("HTCONE", "98:0D:2E:22:B6:46")      # Create the Leash for the brain
+      bLeash = BluetoothLeash("Phone Name", "00:00:00:00:00:00")  # Create the Leash for the brain
       motorCon  = MotorController()                               # Create the Motor Controller
       brain = Brain(motorCon, bLeash)                             # Creating the AI Brain Class
       print('>>..  Testing Array Filling            ..<<')
@@ -611,7 +587,7 @@ else:
    print('>>..       Hauler Bot is starting      ..<<')
    # Create all the classes.
    print('>>..       Creating classes            ..<<')
-   bLeash = BluetoothLeash("HTCONE", "98:0D:2E:22:B6:46")      # Create the Leash for the brain, Change the Name and Mac Address to your own
+   bLeash = BluetoothLeash("Phone Name", "00:00:00:00:00:00")      # Create the Leash for the brain, Change the Name and Mac Address to your own
    motorCon  = MotorController()                               # Create the Motor Controller
    brain = Brain(motorCon, bLeash)                             # Creating the AI Brain Class
    print('>>..       Classes Created             ..<<')
